@@ -1,6 +1,6 @@
 {
   "name": "gandalf-react-native-system-notification",
-  "version": "0.1.10",
+  "version": "0.1.101",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rbnquintero/react-native-system-notification"
@@ -16,6 +16,5 @@
   ],
   "peerDependencies": {
     "react-native": ">=0.15.0"
-
   }
 }
