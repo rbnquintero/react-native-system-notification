@@ -1,21 +1,21 @@
 {
-  "name": "react-native-system-notification",
+  "name": "gandalf-react-native-system-notification",
   "version": "0.1.10",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Neson/react-native-system-notification"
+    "url": "git+https://github.com/rbnquintero/react-native-system-notification"
   },
   "nativePackage": true,
   "description": "Notification for React Native",
-  "author": "Neson <neson@dex.tw>",
-  "homepage": "https://github.com/Neson/react-native-system-notification",
+  "author": "Ruben Quintero",
+  "homepage": "https://github.com/rbnquintero/react-native-system-notification",
   "keywords": [
     "react-native",
     "android",
     "notification"
   ],
   "peerDependencies": {
-    "react-native": ">=0.15.0",
-    "react-native-gcm-android": "^0.1.9"
+    "react-native": ">=0.15.0"
+
   }
 }
