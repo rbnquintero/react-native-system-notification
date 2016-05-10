@@ -55,9 +55,14 @@ public class GCMNotificationListenerService extends GcmListenerService {
         String parsedParamsJson = gson.toJson(parsedParams);
 
         Log.d(TAG, "Notification parsedParams: " + parsedParamsJson);
+        Log.d(TAG, "Notification parsedParams: " + parsedParams.getClass());
 
         NotificationAttributes notificationAttributes = new NotificationAttributes();
-        notificationAttributes.loadFromMap((Map) parsedParams);
+        try {
+            notificationAttributes.loadFromMap((Map) parsedParams);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
 
         NotificationManager nm = new NotificationManager(this);
         nm.create(notificationAttributes.id, notificationAttributes);

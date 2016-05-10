@@ -7,6 +7,7 @@ import com.facebook.react.bridge.WritableMap;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import com.facebook.react.bridge.WritableNativeMap;
@@ -19,10 +20,10 @@ public class NotificationAttributes {
     public String action;
     public String payload;
 
-    public Boolean delayed;
+    public Boolean delayed = false;
     public Integer delay;
 
-    public Boolean scheduled;
+    public Boolean scheduled = false;
     public Long sendAt;
     public Integer sendAtYear;
     public Integer sendAtMonth;
@@ -43,8 +44,8 @@ public class NotificationAttributes {
     public String sound;
     public String vibrate;
     public String lights;
-    public Boolean autoClear;
-    public Boolean onlyAlertOnce;
+    public Boolean autoClear = false;
+    public Boolean onlyAlertOnce = false;
     public String tickerText;
     public Long when;
     public String bigText;
@@ -54,15 +55,16 @@ public class NotificationAttributes {
     public String color;
     public Integer number;
     public String category;
-    public Boolean localOnly;
+    public Boolean localOnly = false;
 
-    public Boolean inboxStyle;
+    public Boolean inboxStyle = false;
     public String inboxStyleBigContentTitle;
     public String inboxStyleSummaryText;
     public ArrayList<String> inboxStyleLines;
 
     public void loadFromMap(Map map) {
-        WritableMap writableMap = (WritableMap) new WritableNativeMap();
+        
+        Map writableMap = new HashMap<String, Object>();
 
         Iterator entries = map.entrySet().iterator();
 
@@ -73,25 +75,72 @@ public class NotificationAttributes {
 
             if ("id".equals(key) || value.getClass().equals(Integer.class) || value.getClass().equals(Long.class)) {
                 Number v = (Number) value;
-                writableMap.putInt(key, (Integer) v.intValue());
+                writableMap.put(key, (Integer) v.intValue());
 
             } else if (value.getClass().equals(Float.class) || value.getClass().equals(Double.class)) {
-                writableMap.putDouble(key, (Double) value);
+                writableMap.put(key, (Double) value);
 
             } else if (value.getClass().equals(String.class)) {
-                writableMap.putString(key, (String) value);
+                writableMap.put(key, (String) value);
 
             } else if (value.getClass().equals(Boolean.class)) {
-                writableMap.putBoolean(key, (Boolean) value);
+                writableMap.put(key, (Boolean) value);
 
             } else {
                 Gson gson = new Gson();
                 String json = gson.toJson(value);
-                writableMap.putString(key, json);
+                writableMap.put(key, json);
             }
         }
 
-        loadFromReadableMap((ReadableMap) writableMap);
+        loadFromReadableMap(writableMap);
+    }
+
+    public void loadFromReadableMap(Map readableMap) {
+        if (readableMap.get("id")!=null) id = (Integer)readableMap.get("id");
+        if (readableMap.get("subject")!=null) subject = (String)readableMap.get("subject");
+        if (readableMap.get("message")!=null) message = (String)readableMap.get("message");
+        if (readableMap.get("action")!=null) action = (String)readableMap.get("action");
+        if (readableMap.get("payload")!=null) payload = (String)readableMap.get("payload");
+
+        if (readableMap.get("delayed")!=null) delayed = (Boolean)readableMap.get("delayed");
+        if (readableMap.get("delay")!=null) delay = (Integer)readableMap.get("delay");
+
+        if (readableMap.get("scheduled")!=null) scheduled = (Boolean)readableMap.get("scheduled");
+        if (readableMap.get("sendAt")!=null) sendAt = Long.parseLong((String)readableMap.get("sendAt"));
+        if (readableMap.get("sendAtYear")!=null) sendAtYear = (Integer)readableMap.get("sendAtYear");
+        if (readableMap.get("sendAtMonth")!=null) sendAtMonth = (Integer)readableMap.get("sendAtMonth");
+        if (readableMap.get("sendAtDay")!=null) sendAtDay = (Integer)readableMap.get("sendAtDay");
+        if (readableMap.get("sendAtWeekDay")!=null) sendAtWeekDay = (Integer)readableMap.get("sendAtWeekDay");
+        if (readableMap.get("sendAtHour")!=null) sendAtHour = (Integer)readableMap.get("sendAtHour");
+        if (readableMap.get("sendAtMinute")!=null) sendAtMinute = (Integer)readableMap.get("sendAtMinute");
+
+        if (readableMap.get("repeatEvery")!=null) repeatEvery = (String)readableMap.get("repeatEvery");
+        if (readableMap.get("repeatType")!=null) repeatType = (String)readableMap.get("repeatType");
+        if (readableMap.get("repeatTime")!=null) repeatTime = (Integer)readableMap.get("repeatTime");
+        if (readableMap.get("repeatCount")!=null) repeatCount = (Integer)readableMap.get("repeatCount");
+        if (readableMap.get("endAt")!=null) endAt = Long.parseLong((String)readableMap.get("endAt"));
+
+        if (readableMap.get("priority")!=null) priority = ((Double) readableMap.get("priority")).intValue();
+        if (readableMap.get("smallIcon")!=null) smallIcon = (String)readableMap.get("smallIcon");
+        if (readableMap.get("largeIcon")!=null) largeIcon = (String)readableMap.get("largeIcon");
+        if (readableMap.get("sound")!=null) sound = (String)readableMap.get("sound");
+        if (readableMap.get("vibrate")!=null) vibrate = (String)readableMap.get("vibrate");
+        if (readableMap.get("lights")!=null) lights = (String)readableMap.get("lights");
+        if (readableMap.get("autoClear")!=null) autoClear = (Boolean)readableMap.get("autoClear");
+        else autoClear = true;
+        if (readableMap.get("onlyAlertOnce")!=null) onlyAlertOnce = (Boolean)readableMap.get("onlyAlertOnce");
+        if (readableMap.get("tickerText")!=null) tickerText = (String)readableMap.get("tickerText");
+        if (readableMap.get("when")!=null) when = Long.parseLong((String)readableMap.get("when"));
+        if (readableMap.get("bigText")!=null) bigText = (String)readableMap.get("bigText");
+        if (readableMap.get("bigStyleImageBase64")!=null) bigStyleImageBase64 = (String)readableMap.get("bigStyleImageBase64");
+        if (readableMap.get("subText")!=null) subText = (String)readableMap.get("subText");
+        if (readableMap.get("progress")!=null) progress = (Integer)readableMap.get("progress");
+        if (readableMap.get("color")!=null) color = (String)readableMap.get("color");
+        if (readableMap.get("number")!=null) number = (Integer)readableMap.get("number");
+        if (readableMap.get("category")!=null) category = (String)readableMap.get("category");
+        if (readableMap.get("localOnly")!=null) localOnly = (Boolean)readableMap.get("localOnly");
+
     }
 
     public void loadFromReadableMap(ReadableMap readableMap) {
@@ -184,7 +233,7 @@ public class NotificationAttributes {
         if (repeatCount != null) writableMap.putInt("repeatCount", repeatCount);
         if (endAt != null) writableMap.putString("endAt", Long.toString(endAt));
 
-        if (priority != null) writableMap.putInt("priority", priority);
+        if (priority != null) writableMap.putDouble("priority", (double) priority);
         if (smallIcon != null) writableMap.putString("smallIcon", smallIcon);
         if (largeIcon != null) writableMap.putString("largeIcon", largeIcon);
         if (sound != null) writableMap.putString("sound", sound);
