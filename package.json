@@ -16,6 +16,5 @@
   ],
   "peerDependencies": {
     "react-native": ">=0.15.0",
-    "gandalf-react-native-gcm-android": "^0.x"
   }
 }
