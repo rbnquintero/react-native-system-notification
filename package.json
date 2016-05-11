@@ -3,7 +3,7 @@
   "version": "0.1.102",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rbnquintero/react-native-system-notification"
+    "url": "git+https://github.com/rbnquintero/react-native-system-notification.git"
   },
   "nativePackage": true,
   "description": "Notification for React Native",
