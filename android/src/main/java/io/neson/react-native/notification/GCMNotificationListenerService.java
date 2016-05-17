@@ -21,8 +21,21 @@ public class GCMNotificationListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle bundle) {
         sendNotification(bundle);
-
-        String notificationString = bundle.getString("notification");
+        String notificationString = "";
+        try {
+            String title = bundle.getBundle("notification").getString("title");
+            String body = bundle.getBundle("notification").getString("body");
+            
+            StringBuffer sb = new StringBuffer();
+            sb.append("{\"subject\":\"");
+            sb.append(title);
+            sb.append("\",\"message\":\"");
+            sb.append(body);
+            sb.append("\"}");
+            notificationString = sb.toString();
+        } catch (Exception e) {
+            notificationString = bundle.getString("notification");
+        }
 
         if (notificationString != null) {
             sendSysNotification(notificationString);
