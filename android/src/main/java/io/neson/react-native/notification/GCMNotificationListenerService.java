@@ -25,12 +25,21 @@ public class GCMNotificationListenerService extends GcmListenerService {
         try {
             String title = bundle.getBundle("notification").getString("title");
             String body = bundle.getBundle("notification").getString("body");
+            String color = bundle.getBundle("notification").getString("color");
             
             StringBuffer sb = new StringBuffer();
             sb.append("{\"subject\":\"");
             sb.append(title);
             sb.append("\",\"message\":\"");
             sb.append(body);
+            sb.append("\",\"bigText\":\"");
+            sb.append(body);
+            sb.append("\",\"smallIcon\":\"");
+            sb.append("sysicon");
+            sb.append("\",\"largeIcon\":\"");
+            sb.append("ic_launcher");
+            sb.append("\",\"color\":\"");
+            sb.append(color);
             sb.append("\"}");
             notificationString = sb.toString();
         } catch (Exception e) {

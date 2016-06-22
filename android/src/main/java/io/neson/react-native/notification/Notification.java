@@ -118,10 +118,12 @@ public class Notification {
     public android.app.Notification build() {
         android.support.v7.app.NotificationCompat.Builder notificationBuilder = new android.support.v7.app.NotificationCompat.Builder(context);
 
+        Bitmap bm = BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier(attributes.largeIcon, "mipmap", context.getPackageName()));
         notificationBuilder
             .setContentTitle(attributes.subject)
             .setContentText(attributes.message)
             .setSmallIcon(context.getResources().getIdentifier(attributes.smallIcon, "mipmap", context.getPackageName()))
+            .setLargeIcon(bm)
             .setAutoCancel(attributes.autoClear)
             .setContentIntent(getContentIntent());
 
